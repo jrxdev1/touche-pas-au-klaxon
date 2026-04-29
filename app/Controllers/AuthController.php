@@ -23,10 +23,10 @@ class AuthController {
             //On mémorise que 'user' est $user qui correspond au mail car on a écrit : $user = $userModel->findByEmail($email);
             $_SESSION['user'] = $user;
 
-            //header('Location: /touche_pas_au_klaxon/public/');
-            var_dump($_SESSION);
-            echo "Connexion réussie";
+            header('Location: /touche_pas_au_klaxon/public/');
             exit;
+            //var_dump($_SESSION);
+            //echo "Connexion réussie";
         } else {
             $error = "Email ou mot de passe incorrect";
             require __DIR__ . '/../Views/login.php';
@@ -38,8 +38,7 @@ class AuthController {
         session_start();
         session_destroy();
 
-        //header('Location: /touche_pas_au_klaxon/public/');
-        echo "Déconnexion réussie";
+        header('Location: /touche_pas_au_klaxon/public/');
         exit;
     }
 }
