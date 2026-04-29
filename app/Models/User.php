@@ -18,6 +18,11 @@ class User {
 
         return $stmt->fetch();
     }
+
+    public function getAll () {
+        $stmt = $this->pdo->query("SELECT * FROM users");
+        return $stmt->fetchAll();
+    }
 }
 
 ?>

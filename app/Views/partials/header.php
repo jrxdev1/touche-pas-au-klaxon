@@ -4,6 +4,8 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 $user = $_SESSION['user'] ?? null;
+
+
 ?>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary px-3">
@@ -14,7 +16,7 @@ $user = $_SESSION['user'] ?? null;
 
     <div class="ms-auto d-flex align-items-center gap-3">
 
-        <?php if ($user): ?>
+        <?php if (is_array($user)): ?>
 
             <a href="/touche_pas_au_klaxon/public/create-trajet" class="btn btn-light btn-sm">
                 + Trajet
@@ -38,3 +40,19 @@ $user = $_SESSION['user'] ?? null;
 
     </div>
 </nav>
+
+<?php if (isset($_SESSION['flash'])): ?>
+    <div class="container mt-3">
+        <div class="alert alert-success">
+            <?= $_SESSION['flash'] ?>
+        </div>
+    </div>
+
+    <?php unset($_SESSION['flash']); ?>
+<?php endif; ?>
+
+<?php if ($user && $user['role'] === 'admin'): ?>
+    <a href="/touche_pas_au_klaxon/public/admin" class="btn btn-warning btn-sm">
+        Admin
+    </a>
+<?php endif; ?>
